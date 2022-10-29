@@ -1,78 +1,61 @@
-// Java program to multiply two square matrices.
+import java.util.Scanner;
 
-import java.io.*;
+public class MatrixMultiplicationExample {
 
-class GFG {
+  public static void main(String args[]) {
+    int row1, col1, row2, col2;
+    Scanner s = new Scanner(System.in);
 
-	// Function to print Matrix
-	static void printMatrix(int M[][],
-							int rowSize,
-							int colSize)
-	{
-		for (int i = 0; i < rowSize; i++) {
-			for (int j = 0; j < colSize; j++)
-				System.out.print(M[i][j] + " ");
+    // Input dimensions of First Matrix: A
+    System.out.print("Enter number of rows in first matrix: ");
+    row1 = s.nextInt();
 
-			System.out.println();
-		}
-	}
+    System.out.print("Enter number of columns in first matrix: ");
+    col1 = s.nextInt();
 
-	// Function to multiply
-	// two matrices A[][] and B[][]
-	static void multiplyMatrix(
-		int row1, int col1, int A[][],
-		int row2, int col2, int B[][])
-	{
-		int i, j, k;
+    // Input dimensions of second matrix: B
+    System.out.print("Enter number of rows in second matrix: ");
+    row2 = s.nextInt();
 
-		// Print the matrices A and B
-		System.out.println("\nMatrix A:");
-		printMatrix(A, row1, col1);
-		System.out.println("\nMatrix B:");
-		printMatrix(B, row2, col2);
+    System.out.print("Enter number of columns in second matrix: ");
+    col2 = s.nextInt();
 
-		// Check if multiplication is Possible
-		if (row2 != col1) {
+    // Requirement check for matrix multiplication
+    if (col1 != row2) {
+      System.out.println("Matrix multiplication is not possible");
+      return;
+    }
 
-			System.out.println(
-				"\nMultiplication Not Possible");
-			return;
-		}
+    int a[][] = new int[row1][col1];
+    int b[][] = new int[row2][col2];
+    int c[][] = new int[row1][col2];
 
-		// Matrix to store the result
-		// The product matrix will
-		// be of size row1 x col2
-		int C[][] = new int[row1][col2];
+    // Input the values of matrices
+    System.out.println("\nEnter values for matrix A : ");
+    for (int i = 0; i < row1; i++) {
+      for (int j = 0; j < col1; j++) a[i][j] = s.nextInt();
+    }
+    System.out.println("\nEnter values for matrix B : ");
+    for (int i = 0; i < row2; i++) {
+      for (int j = 0; j < col2; j++) b[i][j] = s.nextInt();
+    }
 
-		// Multiply the two matrices
-		for (i = 0; i < row1; i++) {
-			for (j = 0; j < col2; j++) {
-				for (k = 0; k < row2; k++)
-					C[i][j] += A[i][k] * B[k][j];
-			}
-		}
+    // Perform matrix multiplication
+    // Using for loop
+    System.out.println("\nMatrix multiplication is : ");
+    for (int i = 0; i < row1; i++) {
+      for (int j = 0; j < col2; j++) {
+        // Initialize the element C(i,j) with zero
+        c[i][j] = 0;
 
-		// Print the result
-		System.out.println("\nResultant Matrix:");
-		printMatrix(C, row1, col2);
-	}
-
-	// Driver code
-	public static void main(String[] args)
-	{
-
-		int row1 = 4, col1 = 3, row2 = 3, col2 = 4;
-
-		int A[][] = { { 1, 1, 1 },
-					{ 2, 2, 2 },
-					{ 3, 3, 3 },
-					{ 4, 4, 4 } };
-
-		int B[][] = { { 1, 1, 1, 1 },
-					{ 2, 2, 2, 2 },
-					{ 3, 3, 3, 3 } };
-
-		multiplyMatrix(row1, col1, A,
-					row2, col2, B);
-	}
+        // Dot product calculation
+        for (int k = 0; k < col1; k++) {
+          c[i][j] += a[i][k] * b[k][j];
+        }
+        
+        System.out.print(c[i][j] + " ");
+      }
+      System.out.println();
+    }
+  }
 }
