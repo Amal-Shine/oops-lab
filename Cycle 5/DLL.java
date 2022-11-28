@@ -1,44 +1,41 @@
 import java.util.Scanner;
+class Node{
+int data;
+Node prev,next;
 
-
-class Node {
-	int data;
-	Node prev, next;
-
-	Node(int data) {
-		this.data = data;
-		this.prev = null;
-		this.next = null;
-	}
+Node(int data)
+{
+this.data=data;
+this.prev=null;
+this.next=null;
+}
 }
 
-class DoublyLinkedList {
+class DoublyLinkedList
+{
+Node head;
+DoublyLinkedList(Node head){
+this.head=head;
+}
 
-	Node head;
+void print() {
+Node node = head;
+while(node.next != null) {
+System.out.print(node.data + " -> " );
+node = node.next;
+}
+System.out.println(node.data);
+}
 
-	DoublyLinkedList(Node head) {
-		this.head = head;
-	}
-
-	void print() {
-		Node node = head;
-		while(node.next != null) {
-			System.out.print(node.data + " -> " );
-			node = node.next;
-		}
-		System.out.println(node.data);
-	}
-
-	void insertAtEnd(int data) {
-		Node ptr = head;
-		while(ptr.next != null)
-			ptr = ptr.next;
-		Node node  = new Node(data);
-		ptr.next = node;
-		node.prev = ptr;
-	}
-
-	void insertAtBegining(int data) {
+void insertAtEnd(int data) {
+Node ptr = head;
+while(ptr.next != null)
+ptr = ptr.next;
+Node node  = new Node(data);
+ptr.next = node;
+node.prev = ptr;
+}
+void insertAtBegining(int data) {
 		Node node = new Node(data);
 		node.next = head;
 		head.prev = node;
@@ -85,10 +82,12 @@ class DoublyLinkedList {
 	}
 }
 
-public class DLL {
+ class DLL {
 	public static void main(String[] args) {
 		DoublyLinkedList dll = new DoublyLinkedList(new Node(1));
 		dll.insertAtEnd(2);
+		dll.insertAtEnd(10);
+		dll.insertAtEnd(12);
 		dll.insertAtBegining(0);
 		dll.print();
 		dll.insert(2, 9);
